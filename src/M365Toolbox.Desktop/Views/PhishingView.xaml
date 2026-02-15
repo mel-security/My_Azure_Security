@@ -1,0 +1,41 @@
+<UserControl x:Class="M365Toolbox.Desktop.Views.PhishingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="SearchName" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <TextBox Width="220" Text="{Binding SearchName, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,8,0,0">
+            <RadioButton Content="SenderEmail" IsChecked="{Binding IsSenderEmail}" Margin="0,0,8,0"/>
+            <RadioButton Content="Domain" IsChecked="{Binding IsDomain}"/>
+            <TextBox Width="260" Margin="12,0,0,0" Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,8,0,0">
+            <DatePicker SelectedDate="{Binding DateStart}"/>
+            <TextBlock Text="→" Margin="8,0" VerticalAlignment="Center"/>
+            <DatePicker SelectedDate="{Binding DateEnd}"/>
+            <TextBlock Text="(stored in UTC)" Margin="8,0" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <WrapPanel Grid.Row="3" Margin="0,10,0,0">
+            <Button Content="Run Search" Command="{Binding RunSearchCommand}" Margin="0,0,8,0"/>
+            <Button Content="Refresh Status" Command="{Binding RefreshStatusCommand}" Margin="0,0,8,0"/>
+            <Button Content="Preview" Command="{Binding PreviewCommand}" Margin="0,0,8,0"/>
+            <Button Content="SoftDelete" Command="{Binding SoftDeleteCommand}" Margin="0,0,8,0"/>
+            <Button Content="HardDelete" Command="{Binding HardDeleteCommand}"/>
+        </WrapPanel>
+
+        <TextBlock Grid.Row="4" Margin="0,12,0,0" TextWrapping="Wrap" Text="{Binding StatusMessage}"/>
+    </Grid>
+</UserControl>
