@@ -11,3 +11,5 @@
   - HardDelete disabled by default in UI flow.
   - HardDelete requires both preview flag and typed confirmation.
 - Audit logs generated for Search start, Preview, and Purge actions.
+
+- Runtime safety check verifies required compliance cmdlets are loaded after connection (`New-ComplianceSearch`, `New-ComplianceSearchAction`).

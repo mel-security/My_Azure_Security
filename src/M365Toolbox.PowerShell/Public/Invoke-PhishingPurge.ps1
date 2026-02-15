@@ -12,6 +12,8 @@ function Invoke-PhishingPurge {
         [string]$TypedConfirmation
     )
 
+    Assert-M365CommandAvailable -CommandName 'New-ComplianceSearchAction' -Hint "Command not found. Connect to Security & Compliance with Connect-IPPSSession and ensure ExchangeOnlineManagement is up to date."
+
     if ($PurgeType -eq 'HardDelete') {
         if (-not $PreviewExecuted) {
             throw 'HardDelete requires a completed preview first.'

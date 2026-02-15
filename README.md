@@ -28,6 +28,31 @@ pwsh -NoProfile -Command "Invoke-Pester tests/M365Toolbox.PowerShell.Tests.ps1"
  dotnet build src/M365Toolbox.Desktop/M365Toolbox.Desktop.csproj
 ```
 
+## Troubleshooting - `New-ComplianceSearchAction` not found
+If you get `CommandNotFoundException` for `New-ComplianceSearchAction`:
+1. Ensure `ExchangeOnlineManagement` is installed and up to date.
+2. Connect with both:
+   - `Connect-ExchangeOnline`
+   - `Connect-IPPSSession`
+3. Validate command availability:
+   - `Get-Command New-ComplianceSearchAction`
+
+The module now validates command availability and returns an explicit hint when the cmdlet is missing.
+
+## Install dotnet + pwsh in this Linux container
+```bash
+# PowerShell (pwsh)
+apt-get update
+apt-get install -y wget apt-transport-https software-properties-common
+wget -q https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb
+dpkg -i packages-microsoft-prod.deb
+apt-get update
+apt-get install -y powershell
+
+# .NET SDK 8
+apt-get install -y dotnet-sdk-8.0
+```
+
 ## Security guardrails
 - No secrets are stored in this repository.
 - Logs mask email addresses and hash sensitive parameters.

@@ -18,8 +18,18 @@ Describe 'New-ContentMatchQuery' {
     }
 }
 
+Describe 'Assert-M365CommandAvailable' {
+    InModuleScope M365Toolbox {
+        It 'throws with hint when command is missing' {
+            Mock Get-Command { $null }
+            { Assert-M365CommandAvailable -CommandName 'New-ComplianceSearchAction' -Hint 'Install module' } | Should -Throw '*Install module*'
+        }
+    }
+}
+
 Describe 'Invoke-PhishingPurge safeguards' {
     BeforeEach {
+        Mock Assert-M365CommandAvailable { }
         Mock New-ComplianceSearchAction { [PSCustomObject]@{ Name = 'action' } }
         Mock Write-ToolboxAuditLog { }
     }
